@@ -19,7 +19,7 @@ export default class Block {
   calculateHash () {
     return sha256(
       this.index + 
-      this.previousHash + 
+      this.prev + 
       this.timestamp + 
       JSON.stringify(this.data)
     ).toString()

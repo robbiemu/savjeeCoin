@@ -1,7 +1,7 @@
 import Block from './block'
 import { Datafactory } from './datafactory'
 
-export default class Blockchain {
+class Blockchain {
   constructor () {
     this.chain = [this.createGenesisBlock()]
   }
@@ -19,8 +19,26 @@ export default class Blockchain {
   }
 
   add (block) {
-    block.previousHash = this.getLatest().hash
+    block.prev = this.getLatest().hash
     block.hash = block.calculateHash()
     this.chain.push(block)
   }
 }
+
+Blockchain.validateChain = function (chain) {
+  for (let i = 1; i < chain.length; i++) {
+    let block = chain[i]
+    let prev = chain[i-1]
+
+    if(block.hash !== block.calculateHash()) {
+      return false
+    }
+
+    if(block.prev !== prev.hash) {
+      return false
+    }
+  }
+  return true
+}
+
+export default Blockchain
