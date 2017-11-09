@@ -4,6 +4,7 @@ import { Datafactory } from './datafactory'
 class Blockchain {
   constructor () {
     this.chain = [this.createGenesisBlock()]
+    this.difficulty = 5
   }
 
   createGenesisBlock () {
@@ -20,7 +21,7 @@ class Blockchain {
 
   add (block) {
     block.prev = this.getLatest().hash
-    block.hash = block.calculateHash()
+    block.mineBlock(this.difficulty)
     this.chain.push(block)
   }
 }

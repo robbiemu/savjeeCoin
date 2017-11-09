@@ -14,12 +14,15 @@ describe('basic blockchain', function () {
       1, 
       new Date().getTime(), 
       Datafactory.genData({amount: 4}))
+
+    console.log('[1/2] mining on block for data {amount: 4}')
     savjeeCoin.add(firstBlock) // why am I giving it these first values in the block??
 
     let secondBlock = new Block(
       2, 
       new Date().getTime(), 
       Datafactory.genData({amount: 10}))
+    console.log('[2/2] mining on block for data {amount: 10}')
     savjeeCoin.add(secondBlock)
 
     console.log(prettyjson.render(savjeeCoin))
